@@ -9,6 +9,9 @@ export default class DownloadTable extends Component{
 			this.setState({movies:result});
 
 		});
+
+		Meteor.subscribe('files.images.all');
+
 		
 	}
 
