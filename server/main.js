@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { FilesCollection } from 'meteor/ostrio:files';
 
 import '../imports/components/Movie';
-import MovieGrab from './MovieGrab';
+import MovieGrab from '../imports/lib/MovieGrab';
 import test from './test';
 let Future = Npm.require( 'fibers/future' ); 
 Meteor.startup(() => {

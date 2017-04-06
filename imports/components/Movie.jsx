@@ -1,8 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { FilesCollection } from 'meteor/ostrio:files';
-import MovieGrab from './MovieGrab';
+import MovieGrab from '../lib/MovieGrab';
 const movieLocation = 'D:\\MovieGrabLocation\\';
-const uuidV4 = Npm.require('uuid/v4');
+
 
 export const Movies = new FilesCollection({
 		collectionName: 'Movies',
@@ -13,13 +13,15 @@ export const Movies = new FilesCollection({
 
 
 if(Meteor.isServer){
+	const uuidV4 = Npm.require('uuid/v4');
 
 	new MovieGrab().getMovies((err, result)=>{
 		result.map(file=>{
+			console.log('ssuio');
 			Movies.addFile( movieLocation + file, {
 				fileName: file,
 				type: '',
-				fileId: uuidV4();,
+				fileId: uuidV4(),
 				meta: {}
 			});
 		});
