@@ -7,5 +7,7 @@ import { render } from 'react-dom';
 import App from '../imports/ui/App.jsx';
  
 Meteor.startup(() => {
-  render(<App />, document.querySelector('#render-target'));
+	Meteor.subscribe('movies');
+	
+  	render(<App />, document.querySelector('#render-target'));
 });

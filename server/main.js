@@ -1,28 +1,12 @@
 import { Meteor } from 'meteor/meteor';
+import { FilesCollection } from 'meteor/ostrio:files';
+
+import '../imports/components/Movie';
 import MovieGrab from './MovieGrab';
 import test from './test';
 let Future = Npm.require( 'fibers/future' ); 
-
-console.log(MovieGrab);
-
 Meteor.startup(() => {
-	let Movies = new FilesCollection({
-		collectionName: 'Movies',
-		downloadRoute: 'movies/',
-		storagePath: 'movies/',
-	});
-
-	Movies.allow({
-	    insert: function() {
-	      return true;
-	    },
-	    update: function() {
-	      return false;
-	    },
-	    remove: function() {
-	      return true;
-	    }
-	  });
+	
 	
 
 	Meteor.methods({
@@ -40,18 +24,6 @@ Meteor.startup(() => {
 	  },
 	});
 
-	Meteor.publish('files.images.all', function () {
-    	return Movies.collection.find({});
-  	});
-
-
-
-	// Usage:
-	// Set cursor:
-	let filesCursor = Movies.find().cursor;
-
-	console.log('!!!!!!!!!!!!!');
-	console.log(filesCursor.fetch());
 
 
 });
