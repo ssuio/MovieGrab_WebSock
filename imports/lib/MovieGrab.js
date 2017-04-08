@@ -1,5 +1,7 @@
 import fs from 'fs';
-const moviesPath = 'D:\\MovieGrabLocation';
+import { Movies } from '../components/Movie';
+const moviesPath = 'H:\\testLocation';
+const movieLocation = 'H:\\testLocation\\';
 
 export default class MovieGrab{
 
@@ -10,17 +12,35 @@ export default class MovieGrab{
 				if (err) {
 			        throw new Meteor.Error('error');
 			    }
-			 	cb(err, result);
 
-				// result.map(file=>{
-				// 	movies[count+''] = file;
-				// 	if(count == result.length){
-				// 		return cb(err , movies);
-				// 	}
-				// 	count++;
-				// });
+
+
+			    let moviesArr = [];
+			 	// cb(err, result);
+
+				result.map(file=>{
+					let movieObj = {};
+					movieObj.name = file;
+
+					Movies.addFile( movieLocation + file, {
+							fileName: file,
+							// type: '',
+							// fileId: uuidV4(),
+							meta: {}
+						}, (err, fileRef)=>{
+							movieObj.downloadUrl = Movies.findOne({name:file}).link();
+							moviesArr.push(movieObj);
+
+							if(count == result.length){
+								return cb(err , moviesArr);
+							}
+							count++;
+						});
+					// console.log(Movies.find().get());
+				});
 				
 			});
+
 	}
 
 }

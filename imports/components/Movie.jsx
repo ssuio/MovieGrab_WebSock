@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { FilesCollection } from 'meteor/ostrio:files';
 import MovieGrab from '../lib/MovieGrab';
-const movieLocation = 'D:\\MovieGrabLocation\\';
+const movieLocation = 'H:\\testLocation\\';
 
 
 export const Movies = new FilesCollection({
@@ -13,22 +13,6 @@ export const Movies = new FilesCollection({
 
 
 if(Meteor.isServer){
-	const uuidV4 = Npm.require('uuid/v4');
-
-	new MovieGrab().getMovies((err, result)=>{
-		result.map(file=>{
-			console.log('ssuio');
-			Movies.addFile( movieLocation + file, {
-				fileName: file,
-				type: '',
-				fileId: uuidV4(),
-				meta: {}
-			});
-		});
-		
-	});
-
-	
 
 	Movies.allow({
 	    insert: function() {
@@ -37,9 +21,9 @@ if(Meteor.isServer){
 	    update: function() {
 	      return false;
 	    },
-	    remove: function() {
-	      return true;
-	    }
+	    // remove: function() {
+	    //   return true;
+	    // }
 	  });
 
 	Movies.allowClient();

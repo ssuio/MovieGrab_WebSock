@@ -1,10 +1,9 @@
 import { Meteor } from 'meteor/meteor';
 import { FilesCollection } from 'meteor/ostrio:files';
-
 import '../imports/components/Movie';
 import MovieGrab from '../imports/lib/MovieGrab';
-import test from './test';
 let Future = Npm.require( 'fibers/future' ); 
+
 Meteor.startup(() => {
 	
 	
@@ -17,6 +16,7 @@ Meteor.startup(() => {
 	  	// 	return future.return(movies);
 	  	// });
   		// return future.wait();
+  		
 
   		let asyncFun = Meteor.wrapAsync(new MovieGrab().getMovies);
   		let result = asyncFun();
