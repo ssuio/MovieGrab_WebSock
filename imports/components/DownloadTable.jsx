@@ -26,6 +26,7 @@ export default class DownloadTable extends Component{
 						    <thead>
 						      	<tr>
 							        <th className="col-xs-3">Name</th>
+							        <th className="col-xs-1">Size</th>
 							        <th className="col-xs-1">Action</th>
 						      	</tr>
 						    </thead>

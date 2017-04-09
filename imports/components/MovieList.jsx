@@ -13,6 +13,7 @@ export default class MovieList extends Component{
 		return(
 		      <tr>
 		        <td>{this.props.movie.name}</td>
+		        <td>{this.props.movie.size}</td>
 		        <td>
 		        	<a href={this.props.movie.downloadUrl.replace('localhost:3000', domain)} download={this.props.movie.name}><button className="btn btn-primary">Download</button></a>
 	        	</td>

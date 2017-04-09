@@ -16,12 +16,10 @@ export default class MovieGrab{
 
 
 			    let moviesArr = [];
-			 	// cb(err, result);
 
 				result.map(file=>{
 					let movieObj = {};
 					movieObj.name = file;
-
 					Movies.addFile( movieLocation + file, {
 							fileName: file,
 							// type: '',
@@ -29,8 +27,15 @@ export default class MovieGrab{
 							meta: {}
 						}, (err, fileRef)=>{
 							movieObj.downloadUrl = Movies.findOne({name:file}).link();
+							movieObj.size = (()=>{
+								if(fileRef.size > 1024*1024*1024)
+									return (fileRef.size/1024/1024/1024).toFixed(2) + ' GB';
+								else if (fileRef.size > 1024*1024)
+									return (fileRef.size/1024/1024).toFixed(0) + ' MB';
+								else 
+									return (fileRef.size/1024).toFixed(2) + ' KB';
+							})();
 							moviesArr.push(movieObj);
-
 							if(count == result.length){
 								return cb(err , moviesArr);
 							}
